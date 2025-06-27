@@ -11,21 +11,16 @@ import java.util.UUID
 class FinishWorkActivity : AppCompatActivity() {
 
     private val workerNotificacao = "notificacaoPreçoFIIs"
-    private lateinit var periodicWorkRequest: PeriodicWorkRequest
-    private lateinit var oneTimeWorkRequest: OneTimeWorkRequest
-    private lateinit var firstWorkRequest: OneTimeWorkRequest
-    private lateinit var secondWorkRequest: OneTimeWorkRequest
-    private lateinit var thirdWorkRequest: OneTimeWorkRequest
-
+    private val tagPing = "ping"
 
     fun encerraWork() {
         WorkManager.getInstance(this)
             .cancelAllWork()
 
         WorkManager.getInstance(this)
-            .cancelUniqueWork(workerNotificacao)
+            .cancelAllWorkByTag(tagPing)
 
         WorkManager.getInstance(this)
-            .cancelWorkById(UUID.randomUUID())
+            .cancelUniqueWork(workerNotificacao)
     }
 }
